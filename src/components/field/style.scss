@@ -1,0 +1,54 @@
+@import 'src/constants/constants';
+
+.field {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5%;
+  margin-bottom: 30px;
+
+  &__label {
+    margin-bottom: 15px;
+    color: grey;
+  }
+
+  &__input {
+    height: 60px;
+    width: 400px;
+    padding: 15px 40px;
+    border: 1px solid #b7b4b4;
+    border-radius: 4px;
+    outline: none;
+
+    &:focus {
+      border: 1px solid #7a7a7a;
+    }
+  }
+
+  &__container {
+    display: flex;
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 20px;
+    left: 17px;
+    color: $ICON_LOG_IN_COLOR;
+  }
+
+  &__password-icon {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: $ICON_LOG_IN_COLOR;
+    cursor: pointer;
+  }
+
+  &__error-msg {
+    color: red;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: right;
+    margin-top: 20px;
+  }
+}

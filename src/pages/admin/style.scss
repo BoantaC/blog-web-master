@@ -1,0 +1,8 @@
+@import '../../constants/constants';
+
+.admin-container {
+  @extend %page-container;
+  display: flex;
+  background: red;
+
+}

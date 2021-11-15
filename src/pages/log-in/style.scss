@@ -1,0 +1,11 @@
+@import 'src/constants/constants';
+
+.home-container {
+  @extend %page-container;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container {
+  margin: auto;
+}

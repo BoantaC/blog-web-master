@@ -1,0 +1,21 @@
+@import 'src/constants/constants';
+
+.logo-option-container {
+  display: flex;
+
+  &__image {
+    font-size: 40px;
+  }
+}
+
+.logo-option-image {
+  color: $ICON_LOG_IN_COLOR;
+  font-size: 20px;
+}
+
+.main-menu__title {
+  color: $ICON_LOG_IN_COLOR;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+}

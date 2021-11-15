@@ -1,0 +1,16 @@
+@import 'src/constants/constants';
+
+.button {
+  display: flex;
+  border: 1px solid $ICON_LOG_IN_COLOR;
+  border-radius: 4px;
+  outline: none;
+  margin: auto;
+  padding: 20px 40px;
+  cursor: pointer;
+
+  &__name {
+    color: grey;
+    margin: auto;
+  }
+}

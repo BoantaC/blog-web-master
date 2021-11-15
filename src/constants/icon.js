@@ -1,0 +1,9 @@
+export const MAIL_ICON = ['fa', 'envelope-open-text'];
+export const PASSWORD_ICON = ['fa', 'key'];
+export const INVISIBLE_PASSWORD_ICON = ['fa', 'eye-slash'];
+export const VISIBLE_PASSWORD_ICON = ['fa', 'eye'];
+export const TITLE_MAIN_MENU_ICON = ['fa', 'apple-alt'];
+export const INBOX_ICON = ['fa', 'inbox'];
+export const SETTINGS_ICON = ['fa', 'cogs'];
+export const TEAM_ICON = ['fa', 'user-friends'];
+export const CHAT_ICON = ['fa', 'comments'];

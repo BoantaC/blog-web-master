@@ -11,12 +11,16 @@ import './style.scss';
 
 export const Field = ({
   onChange,
-  usernameText,
+  label,
   type,
   icon,
   value,
   validationFunction,
   errorMessage,
+  fieldClass,
+  isTextArea,
+  textAreaRows,
+  textAreaCols,
 }) => {
   const [visibilityPassword, setVisibilityPassword] = useState(false);
 
@@ -38,35 +42,45 @@ export const Field = ({
 
   const _renderErrorMessage = () => {
     return (
-      value.length !== 0 &&
-      validationFunction(value) !== undefined &&
-      !validationFunction(value) &&
-      errorMessage && (
-        <span className="field__error-msg">
-          {errorMessage || 'Invalid Input'}
-        </span>
-      )
+      <span className="field__error-msg">
+        {value.length !== 0 &&
+        validationFunction(value) !== undefined &&
+        !validationFunction(value) &&
+        errorMessage
+          ? errorMessage || 'Invalid Input'
+          : ''}
+      </span>
     );
   };
 
   return (
     <div className="field">
-      <p className="field__label">{usernameText}</p>
+      <p className="field__label">{label}</p>
       <div className="field__container">
-        <input
-          className="field__input"
-          type={
-            type !== 'password'
-              ? 'text'
-              : visibilityPassword === true
-              ? 'password'
-              : 'text'
-          }
-          placeholder={usernameText}
-          onChange={onChange}
-          value={value}
-        />
-
+        {isTextArea ? (
+          <textarea
+            cols={textAreaCols}
+            rows={textAreaRows}
+            className={`field__input ${fieldClass}`}
+            placeholder={label}
+            onChange={onChange}
+            value={value}
+          />
+        ) : (
+          <input
+            className={`field__input ${fieldClass}`}
+            type={
+              type !== 'password'
+                ? 'text'
+                : visibilityPassword === true
+                ? 'password'
+                : 'text'
+            }
+            placeholder={label}
+            onChange={onChange}
+            value={value}
+          />
+        )}
         {_renderPasswordEye()}
         <FontAwesomeIcon className="field__icon" icon={icon} />
       </div>
@@ -77,12 +91,15 @@ export const Field = ({
 
 Field.propTypes = {
   onChange: Proptypes.func,
-  usernameText: Proptypes.string.isRequired,
+  label: Proptypes.string.isRequired,
   type: Proptypes.string.isRequired,
   icon: Proptypes.array,
   value: Proptypes.string.isRequired,
-  validationFunction: Proptypes.func.isRequired,
-  errorMessage: Proptypes.string.isRequired,
+  validationFunction: Proptypes.func,
+  errorMessage: Proptypes.string,
+  isTextArea: Proptypes.bool,
+  textAreaRows: Proptypes.number,
+  textAreaCols: Proptypes.number,
 };
 
 export default Field;

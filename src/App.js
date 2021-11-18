@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import LogInPage from './pages/log-in';
 import AdminPage from './pages/admin';
 
@@ -12,9 +17,12 @@ import {
   faUserFriends,
   faCogs,
   faInbox,
+  faEdit,
+  faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import fontawesome from '@fortawesome/fontawesome';
 import BlogPage from './pages/blog-page';
+import BlogPost from './pages/blog-post';
 
 fontawesome.library.add(
   faEnvelopeOpenText,
@@ -26,13 +34,15 @@ fontawesome.library.add(
   faUserFriends,
   faCogs,
   faInbox,
+  faEdit,
+  faTrashAlt
 );
 
 export const App = () => {
+  const history = useHistory();
+
   return (
     <>
-      <div className="app" />
-      {/*eslint-disable-next-line no-restricted-globals*/}
       <Router history={history}>
         <Switch>
           <Route exact path="/blog">
@@ -40,6 +50,9 @@ export const App = () => {
           </Route>
           <Route exact path="/admin">
             <AdminPage />
+          </Route>
+          <Route exact path="/admin/add-post">
+            <BlogPost />
           </Route>
           <Route exact path="/login">
             <LogInPage />

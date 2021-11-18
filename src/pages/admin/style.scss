@@ -3,6 +3,49 @@
 .admin-container {
   @extend %page-container;
   display: flex;
-  background: red;
+  flex-direction: column;
+}
 
+.managing-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 250px auto;
+}
+
+.admin-menu {
+  display: grid;
+  grid-template-rows: 200px 200px;
+  height: 100%;
+  border-right: 1px solid $ICON_LOG_IN_COLOR;
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  height: 60px;
+}
+
+.admin-manage-posts {
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 70px calc(100vh - 70px - 88px - 60px);
+}
+
+.manage-posts-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid grey;
+}
+
+.blog-post-title {
+  color: grey;
+  font-size: 20px;
+  margin: auto;
+}
+
+.admin-menu {
+  border-right: 1px solid grey;
 }

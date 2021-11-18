@@ -1,0 +1,19 @@
+.main-menu {
+  display: grid;
+  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+
+  &__option {
+    margin: auto;
+    display: flex;
+    cursor: pointer;
+
+    &__text {
+      color: #8a8585;
+      margin-left: 10px;
+      font-size: 20px;
+
+    }
+  }
+}

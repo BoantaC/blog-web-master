@@ -1,6 +1,6 @@
 import { CHAT_ICON, INBOX_ICON, SETTINGS_ICON, TEAM_ICON } from './icon';
 
-export const menuOptions = [
+export const MENU_OPTIONS = [
   {
     label: 'Inbox',
     icon: INBOX_ICON,
@@ -28,5 +28,16 @@ export const menuOptions = [
   {
     label: 'Settings',
     icon: SETTINGS_ICON,
+  },
+];
+
+export const ADMIN_MENU = [
+  {
+    label: 'Blog Posts',
+    icon: '',
+  },
+  {
+    label: 'Profile',
+    icon: '',
   },
 ];

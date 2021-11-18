@@ -7,3 +7,5 @@ export const INBOX_ICON = ['fa', 'inbox'];
 export const SETTINGS_ICON = ['fa', 'cogs'];
 export const TEAM_ICON = ['fa', 'user-friends'];
 export const CHAT_ICON = ['fa', 'comments'];
+export const EDIT_ICON = ['fa', 'edit'];
+export const DELETE_ICON = ['fa', 'trash-alt'];

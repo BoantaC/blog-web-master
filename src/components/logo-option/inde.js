@@ -5,13 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './style.scss';
 
-export const LogoOption = ({ height, width, icon, text, textClasses }) => {
+export const LogoOption = ({
+  logoClass,
+  height,
+  width,
+  icon,
+  text,
+  textClasses,
+}) => {
   return (
     <div
-      className="logo-option-container"
+      className={`${logoClass} logo-option-container`}
       style={{ height: `${height}px`, width: `${width}` }}
     >
-        <FontAwesomeIcon icon={icon} className="logo-option-image" />
+      <FontAwesomeIcon icon={icon} className="logo-option-image" />
       <p className={textClasses}>{text}</p>
     </div>
   );

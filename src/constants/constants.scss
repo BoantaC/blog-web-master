@@ -3,6 +3,11 @@
   height: 100vh;
 }
 
+%disabled {
+  opacity: .7;
+  pointer-events: none;
+}
+
 //Log-in page constants
 
 $MAIN_LOG_IN_COLOR: #e3e3e3;

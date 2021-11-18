@@ -16,3 +16,8 @@ export const validatePassword = (password) => {
 
   return PASSWORD_REGEX.test(String(password));
 };
+
+const regExp = /[!0-9@#$%^&*()_+\-=[\]{};':"\\|,<>/?]/;
+export const validateName = (name) => {
+  return regExp.test(String(name).toLowerCase());
+};

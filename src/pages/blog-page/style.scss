@@ -4,7 +4,6 @@
   @extend %page-container;
   display: flex;
   background: grey;
-  padding: 100px;
 }
 
 .blog-page-container {
@@ -12,15 +11,13 @@
   width: 100%;
   height: 100%;
   display: flex;
-  border-radius: 20px;
   background: white;
 
   &__main-menu-container {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
+    width: 300px;
+    display: grid;
+    grid-template-rows: 90px 800px;
     border-right: 1px solid $ICON_LOG_IN_COLOR;
-    padding: 50px;
   }
 
   &__dashboard {
@@ -38,22 +35,4 @@
   width: 100%;
   height: 80px;
   border-bottom: 1px solid $ICON_LOG_IN_COLOR;
-}
-
-.main-menu {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-
-  &__option {
-    margin-bottom: 50px;
-
-    &__text {
-      color: #8a8585;
-      font-size: 15px;
-      margin-left: 10px;
-    }
-  }
 }

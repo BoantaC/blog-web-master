@@ -1,0 +1,19 @@
+@import '../../constants/constants';
+
+.admin-header {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid $ICON_LOG_IN_COLOR;
+
+  &__title {
+    display: flex;
+    color: #8a8585;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  &__logo {
+    padding: 30px;
+  }
+}

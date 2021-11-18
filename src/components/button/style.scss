@@ -1,16 +1,28 @@
 @import 'src/constants/constants';
 
-.button {
+.primary-button {
+  width: 100%;
   display: flex;
   border: 1px solid $ICON_LOG_IN_COLOR;
   border-radius: 4px;
+  padding: 15px 20px;
   outline: none;
-  margin: auto;
-  padding: 20px 40px;
   cursor: pointer;
+}
 
-  &__name {
-    color: grey;
-    margin: auto;
-  }
+.button-name {
+  font-size: 20px;
+  color: grey;
+  margin: auto;
+}
+
+.secondary-button {
+  padding: 15px 20px;
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+}
+
+.disabled-button {
+  @extend %disabled;
 }

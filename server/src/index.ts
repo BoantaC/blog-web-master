@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { UserRouter } from './user/user.router';
 import { BlogRouter } from './blog/blog.router';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const DEFAULT_PORT = 8081;
 const DATABASE_URL = 'mongodb://localhost:27017/blog';
@@ -12,6 +13,7 @@ export class App {
 
   constructor() {
     this.app.use(bodyParser.json());
+    this.app.use(cors());
 
     this.initDatabase();
   }

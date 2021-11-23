@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { MAIL_ICON, PASSWORD_ICON } from '../../constants/icon';
+import { authService } from '../../services/auth-service';
 
 import { validateEmail, validatePassword } from '../../helpers/validators';
 import Field from '../../components/field';
@@ -13,7 +14,7 @@ export const LogInPage = () => {
   const history = useHistory();
   const [usernameInputValue, setUsernameInputValue] = useState('');
   const [passwordInputValue, setPasswordInputValue] = useState('');
-  const [showErrorLogin] = useState(false);
+  const [showErrorLogin, setShowErrorLogin] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -29,22 +30,27 @@ export const LogInPage = () => {
 
   const onChangeUsernameInputHandler = (event) => {
     setUsernameInputValue(event.target.value);
+    setShowErrorLogin(false);
   };
 
   const onChangePasswordInputHandler = (event) => {
     setPasswordInputValue(event.target.value);
+    setShowErrorLogin(false);
   };
 
   const onLogin = () => {
-    // TODO: Add login logic
-    if (
-      validateEmail(usernameInputValue) &&
-      validatePassword(passwordInputValue)
-    ) {
-      history.push('/admin');
-    } else {
-      alert('Invalid something');
-    }
+    authService
+      .login(usernameInputValue, passwordInputValue)
+      .then((result) => {
+        if (result?.success) {
+          history.push('/admin');
+        } else {
+          setShowErrorLogin(true);
+        }
+      })
+      .catch(() => {
+        setShowErrorLogin(true);
+      });
   };
 
   return (

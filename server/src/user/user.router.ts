@@ -3,6 +3,7 @@ import * as core from 'express-serve-static-core';
 import { Request, Response } from 'express';
 import { IUser } from './user.model';
 import { respondWithError, respondWithSuccess } from '../shared/utils/response';
+import * as bcrypt from 'bcrypt';
 
 export class UserRouter {
   private userDatastore: UserDatastore;
@@ -13,11 +14,14 @@ export class UserRouter {
     this.initRoutes(app);
   }
 
+  // user initRoutes
   private initRoutes(app: core.Express) {
-    // user initRoutes
     app.get('/api/user/:id', this.getUserById.bind(this));
     app.get('/api/user/get-all', this.getAllUsers.bind(this));
+
     app.post('/api/user', this.create.bind(this));
+    app.post('/api/user/auth/login', this.login.bind(this));
+
     app.put('/api/user/:id', this.update.bind(this));
     app.delete('/api/user/:id', this.delete.bind(this));
   }
@@ -48,32 +52,38 @@ export class UserRouter {
       .then((result) => {
         respondWithSuccess(response, result);
       })
-      .catch((error) => {
-        respondWithError(response, error);
+      .catch(() => {
+        respondWithError(response, 'An error occured while retrieving users');
       });
   }
 
   // Create User
   private create(request: Request, response: Response) {
     const user: IUser = request.body;
-    if (
-      !request.body.firstName ||
-      !request.body.lastName ||
-      !request.body.email
-    ) {
+
+    if (!user.firstName || !user.lastName || !user.email || !user.password) {
       return response.status(400).send({
         message: 'User data can not be empty',
       });
     }
 
-    this.userDatastore
-      .create(user)
-      .then((result) => {
-        respondWithSuccess(response, result);
-      })
-      .catch((error) => {
-        respondWithError(response, error, 500);
-      });
+    bcrypt.hash(user.password, 10, (error, hash) => {
+      if (error) {
+        return respondWithError(response, 'Could not create user', 500);
+      }
+
+      user.password = hash;
+
+      this.userDatastore
+        .create(user)
+        .then((result) => {
+          // bcrypt function
+          respondWithSuccess(response, result);
+        })
+        .catch((dbError) => {
+          respondWithError(response, dbError, 500);
+        });
+    });
   }
 
   // Update User
@@ -86,9 +96,7 @@ export class UserRouter {
       !request.body.lastName &&
       !request.body.email
     ) {
-      return response
-        .status(400)
-        .send({ message: 'User update cannot be empty' });
+      return respondWithError(response, 'User update cannot be empty', 500);
     }
 
     this.userDatastore
@@ -107,7 +115,7 @@ export class UserRouter {
 
     if (!userId) {
       return response.status(400).send({
-        message: 'Cannot delete the user because u introduce the wrong id :)',
+        message: 'Cannot delete the user because u introduce the wrong id ',
       });
     }
 
@@ -115,6 +123,29 @@ export class UserRouter {
       .delete(userId)
       .then((result) => {
         respondWithSuccess(response, result);
+      })
+      .catch((error) => {
+        respondWithError(response, error, 500);
+      });
+  }
+
+  // Auth router
+  private login(request: Request, response: Response) {
+    const username: string = request.body.username;
+    const password: string = request.body.password;
+
+    if (!username || !password) {
+      return respondWithError(response, 'Invalid credentials', 404);
+    }
+
+    this.userDatastore
+      .getUserByUsernameAndPassword(username, password)
+      .then((result) => {
+        if (!result || !result._id) {
+          return respondWithError(response, 'Invalid credentials', 404);
+        } else {
+          return respondWithSuccess(response, result);
+        }
       })
       .catch((error) => {
         respondWithError(response, error, 500);

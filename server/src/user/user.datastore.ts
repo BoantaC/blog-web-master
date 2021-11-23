@@ -20,4 +20,8 @@ export class UserDatastore {
   findAll() {
     return User.find();
   }
+
+  getUserByUsernameAndPassword(username: string, password: string) {
+    return User.findOne({ username, password });
+  }
 }

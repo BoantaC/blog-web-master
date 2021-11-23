@@ -54,7 +54,7 @@ export const AdminPage = () => {
             <TableComponent
               actions={BLOG_TABLE_ACTIONS}
               tableHeaders={BLOG_POSTS_TABLE_HEADERS}
-              entities={blogPostsInformation}
+              entities={CreateEditBlogsInformation}
             />
           </div>
         </div>
@@ -65,7 +65,7 @@ export const AdminPage = () => {
 
 export default AdminPage;
 
-const blogPostsInformation = [
+const CreateEditBlogsInformation = [
   {
     title: 'Sed porttitor',
     description:

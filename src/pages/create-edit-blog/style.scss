@@ -9,7 +9,8 @@
 .blog-post {
   width: 100%;
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 250px 1fr;
 
   &__create-title-container {
   }
@@ -22,5 +23,14 @@
 }
 
 .content-input {
+  display: flex;
+  flex-direction: column;
   margin: 80px auto auto auto;
+}
+
+.x {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

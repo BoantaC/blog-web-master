@@ -22,7 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import fontawesome from '@fortawesome/fontawesome';
 import BlogPage from './pages/blog-page';
-import BlogPost from './pages/blog-post';
+import CreateEditBlog from './pages/create-edit-blog';
 
 fontawesome.library.add(
   faEnvelopeOpenText,
@@ -51,8 +51,11 @@ export const App = () => {
           <Route exact path="/admin">
             <AdminPage />
           </Route>
-          <Route exact path="/admin/add-post">
-            <BlogPost />
+          <Route exact path="/admin/blog/create">
+            <CreateEditBlog />
+          </Route>
+          <Route exact path="/admin/blog/edit/:id">
+            <CreateEditBlog />
           </Route>
           <Route exact path="/login">
             <LogInPage />

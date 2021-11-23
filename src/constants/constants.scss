@@ -8,6 +8,10 @@
   pointer-events: none;
 }
 
+.margin-left {
+  display: flex;
+  margin-left: 10px;
+}
 //Log-in page constants
 
 $MAIN_LOG_IN_COLOR: #e3e3e3;

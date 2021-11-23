@@ -1,5 +1,6 @@
 const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 export const validateEmail = (email) => {
   if (!email?.length) {
     return false;
@@ -9,6 +10,7 @@ export const validateEmail = (email) => {
 };
 
 const PASSWORD_REGEX = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,}/;
+
 export const validatePassword = (password) => {
   if (!password?.length) {
     return false;
@@ -18,6 +20,7 @@ export const validatePassword = (password) => {
 };
 
 const regExp = /[!0-9@#$%^&*()_+\-=[\]{};':"\\|,<>/?]/;
-export const validateName = (name) => {
+
+export const validateText = (name) => {
   return regExp.test(String(name).toLowerCase());
 };

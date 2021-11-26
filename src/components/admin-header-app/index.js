@@ -20,7 +20,7 @@ export const AdminHeader = ({ text, icon, textClasses }) => {
 
 AdminHeader.propTypes = {
   text: Proptypes.string.isRequired,
-  icon: Proptypes.string,
+  icon: Proptypes.array,
   textClasses: Proptypes.string,
 };
 

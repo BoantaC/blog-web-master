@@ -33,8 +33,9 @@ export const TableComponent = ({ tableHeaders, entities, actions }) => {
           )
         )}
         <td className="table__body__row__td medium">
-          {actions.map((action) => (
+          {actions.map((action, index) => (
             <div
+              key={index}
               onClick={() => action.onClick(entity)}
               className={`${action.icon} table__body__row__td__action`}
               title={action.title}

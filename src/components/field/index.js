@@ -82,7 +82,7 @@ export const Field = ({
           />
         )}
         {_renderPasswordEye()}
-        <FontAwesomeIcon className="field__icon" icon={icon} />
+        {icon && <FontAwesomeIcon className='field__icon' icon={icon} />}
       </div>
       {_renderErrorMessage()}
     </div>

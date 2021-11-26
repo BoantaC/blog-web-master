@@ -1,13 +1,13 @@
 import { validateEmail, validatePassword } from '../helpers/validators';
-import axios from 'axios';
 import { AUTH_LOGIN } from '../constants/api';
+import axios from 'axios';
 
 export const authService = {
-  login: (username, password) => {
+  login: (email, password) => {
     return new Promise((resolve, reject) => {
-      if (validateEmail(username) && validatePassword(password)) {
+      if (validateEmail(email) && validatePassword(password)) {
         const body = {
-          username: username,
+          email: email,
           password: password,
         };
 

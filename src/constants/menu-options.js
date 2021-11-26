@@ -34,10 +34,8 @@ export const MENU_OPTIONS = [
 export const ADMIN_MENU = [
   {
     label: 'Blog Posts',
-    icon: '',
   },
   {
     label: 'Profile',
-    icon: '',
   },
 ];

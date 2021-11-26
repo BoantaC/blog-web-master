@@ -9,11 +9,9 @@ export const MenuComponent = ({ options, menuClass }) => {
     return (
       <div className={`${menuClass}`}>
         {options.map((option, index) => (
-          <div className="main-menu__option">
+          <div key={index} className="main-menu__option">
             <LogoOption
               textClasses={'main-menu__option__text'}
-              key={index}
-              icon={option.icon}
               text={option.label}
             />
           </div>

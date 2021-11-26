@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import {
   DELETE_ICON,
@@ -16,12 +17,18 @@ import TableComponent from '../../components/table';
 import './style.scss';
 
 export const AdminPage = () => {
+  const history = useHistory();
+
   const onEditBlog = (blog) => {
     console.log('Edit blog', blog);
   };
 
   const onDeleteBlog = (blog) => {
     console.log('Delete blog', blog);
+  };
+
+  const onAddPost = () => {
+    history.push('/admin/blog/create');
   };
 
   const BLOG_TABLE_ACTIONS = [
@@ -48,6 +55,7 @@ export const AdminPage = () => {
               href={'http://localhost:3000/admin/create'}
               secondary
               text="Add post"
+              onClick={onAddPost}
             />
           </div>
           <div className="manage-posts-container">

@@ -21,7 +21,7 @@ export class UserDatastore {
     return User.find();
   }
 
-  getUserByUsernameAndPassword(username: string, password: string) {
-    return User.findOne({ username, password });
+  getUserByEmail(email: string) {
+    return User.findOne({ email });
   }
 }

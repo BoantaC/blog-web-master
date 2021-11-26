@@ -5,6 +5,7 @@ import { MAIL_ICON, PASSWORD_ICON } from '../../constants/icon';
 import { authService } from '../../services/auth-service';
 
 import { validateEmail, validatePassword } from '../../helpers/validators';
+
 import Field from '../../components/field';
 import Button from '../../components/button';
 
@@ -12,24 +13,26 @@ import './style.scss';
 
 export const LogInPage = () => {
   const history = useHistory();
-  const [usernameInputValue, setUsernameInputValue] = useState('');
+
+  const [emailInputValue, setEmailInputValue] = useState('');
   const [passwordInputValue, setPasswordInputValue] = useState('');
+
   const [showErrorLogin, setShowErrorLogin] = useState(false);
+
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     setHasError(anyOfFieldsHasError);
-  }, [usernameInputValue, passwordInputValue]);
+  }, [emailInputValue, passwordInputValue]);
 
   const anyOfFieldsHasError = () => {
     return (
-      !validateEmail(usernameInputValue) ||
-      !validatePassword(passwordInputValue)
+      !validateEmail(emailInputValue) || !validatePassword(passwordInputValue)
     );
   };
 
-  const onChangeUsernameInputHandler = (event) => {
-    setUsernameInputValue(event.target.value);
+  const onChangeEmailInputHandler = (event) => {
+    setEmailInputValue(event.target.value);
     setShowErrorLogin(false);
   };
 
@@ -40,7 +43,7 @@ export const LogInPage = () => {
 
   const onLogin = () => {
     authService
-      .login(usernameInputValue, passwordInputValue)
+      .login(emailInputValue, passwordInputValue)
       .then((result) => {
         if (result?.success) {
           history.push('/admin');
@@ -57,8 +60,8 @@ export const LogInPage = () => {
     <div className="home-container">
       <div className="form-container">
         <Field
-          value={usernameInputValue}
-          onChange={onChangeUsernameInputHandler}
+          value={emailInputValue}
+          onChange={onChangeEmailInputHandler}
           label="Email address"
           type="text"
           icon={MAIL_ICON}

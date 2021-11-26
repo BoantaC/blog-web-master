@@ -14,16 +14,16 @@ export class BlogRouter {
   }
 
   private initRoutes(app: core.Express) {
-    // blog initRoutes
-
     app.get('/api/blog/:id', this.getBlogById.bind(this));
     app.get('/api/blog/get-all', this.getAllUsers.bind(this));
-    app.post('/api/blog/', this.create.bind(this));
+
+    app.post('/api/blog', this.create.bind(this));
+
     app.put('/api/blog/:id', this.update.bind(this));
+
     app.delete('/api/blog/:id', this.delete.bind(this));
   }
 
-  // get Blog id
   private getBlogById(request: Request, response: Response) {
     const blogId: string = request.params.id;
 
@@ -42,7 +42,6 @@ export class BlogRouter {
       });
   }
 
-  // Get All blogs
   private getAllUsers(request: Request, response: Response) {
     this.blogDataStore
       .findAll()
@@ -54,14 +53,18 @@ export class BlogRouter {
       });
   }
 
-  // create blog
   private create(request: Request, response: Response) {
     const blog: IBlog = request.body;
+    const title: string = request.body.title;
+    const description: string = request.body.description;
 
-    if (!request.body.title || !request.body.description) {
-      return response.status(400).send({
-        message: 'User data can not be empty',
-      });
+    if (!title || !description) {
+      // If the description and title does not exists, return an error response
+      return respondWithError(
+        response,
+        'Blog title or description cannot be empty',
+        400
+      );
     }
 
     this.blogDataStore
@@ -74,7 +77,6 @@ export class BlogRouter {
       });
   }
 
-  // update blog
   private update(request: Request, response: Response) {
     const blog: IBlog = request.body;
     const blogId: string = request.params.id;
@@ -95,7 +97,6 @@ export class BlogRouter {
       });
   }
 
-  // delete blog
   private delete(request: Request, response: Response) {
     const blog: IBlog = request.body;
     const blogId: string = request.params.id;

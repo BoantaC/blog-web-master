@@ -14,7 +14,6 @@ export class UserRouter {
     this.initRoutes(app);
   }
 
-  // user initRoutes
   private initRoutes(app: core.Express) {
     app.get('/api/user/:id', this.getUserById.bind(this));
     app.get('/api/user/get-all', this.getAllUsers.bind(this));
@@ -26,7 +25,6 @@ export class UserRouter {
     app.delete('/api/user/:id', this.delete.bind(this));
   }
 
-  // Get User by id
   private getUserById(request: Request, response: Response) {
     const userId: string = request.params.id;
 
@@ -45,7 +43,6 @@ export class UserRouter {
       });
   }
 
-  // Get All users
   private getAllUsers(request: Request, response: Response) {
     this.userDatastore
       .findAll()
@@ -57,7 +54,6 @@ export class UserRouter {
       });
   }
 
-  // Create User
   private create(request: Request, response: Response) {
     const user: IUser = request.body;
 
@@ -77,7 +73,6 @@ export class UserRouter {
       this.userDatastore
         .create(user)
         .then((result) => {
-          // bcrypt function
           respondWithSuccess(response, result);
         })
         .catch((dbError) => {
@@ -86,7 +81,6 @@ export class UserRouter {
     });
   }
 
-  // Update User
   private update(request: Request, response: Response) {
     const user: IUser = request.body;
     const userId: string = request.params.id;
@@ -109,7 +103,6 @@ export class UserRouter {
       });
   }
 
-  // Delete User
   private delete(request: Request, response: Response) {
     const userId: string = request.params.id;
 
@@ -129,26 +122,45 @@ export class UserRouter {
       });
   }
 
-  // Auth router
   private login(request: Request, response: Response) {
-    const username: string = request.body.username;
+    const email: string = request.body.email;
     const password: string = request.body.password;
 
-    if (!username || !password) {
-      return respondWithError(response, 'Invalid credentials', 404);
+    if (!email || !password) {
+      return respondWithError(response, 'Invalid credentials', 400);
     }
 
+    // Get user from database based on given username
     this.userDatastore
-      .getUserByUsernameAndPassword(username, password)
-      .then((result) => {
-        if (!result || !result._id) {
-          return respondWithError(response, 'Invalid credentials', 404);
+      .getUserByEmail(email)
+      .then((existingUser) => {
+        if (!existingUser || !existingUser._id) {
+          // If the user does not exists, return an error response
+          return respondWithError(response, 'Invalid credentials', 400);
         } else {
-          return respondWithSuccess(response, result);
+          // If the user exists, compare the two passwords (the given one and the saved one)
+          console.log('Compare:', password, existingUser.password);
+          bcrypt.compare(
+            password,
+            existingUser.password,
+            (comparisonError, passwordMatch) => {
+              console.log('Password:', passwordMatch);
+              if (comparisonError) {
+                return respondWithError(response, 'Invalid credentials', 400);
+              }
+              if (passwordMatch) {
+                return respondWithSuccess(response, {
+                  message: 'Login with success',
+                });
+              } else {
+                return respondWithError(response, 'Invalid credentials', 400);
+              }
+            }
+          );
         }
       })
       .catch((error) => {
-        respondWithError(response, error, 500);
+        return respondWithError(response, error, 500);
       });
   }
 }

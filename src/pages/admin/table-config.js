@@ -7,26 +7,6 @@ export const BLOG_POSTS_TABLE_HEADERS = [
   {
     label: 'Description',
     key: 'description',
-    classes: 'large'
+    classes: 'large',
   },
-  // {
-  //   label: 'N',
-  //   key: 'description',
-  //   classes: 'large'
-  // },
-  // {
-  //   label: 'Description',
-  //   key: 'description',
-  //   // classes: 'large'
-  // },
-  // {
-  //   label: 'Description',
-  //   key: 'description',
-  //   // classes: 'large'
-  // },
-  // {
-  //   label: 'Description',
-  //   key: 'description',
-  //   // classes: 'large'
-  // },
 ];

@@ -13,7 +13,7 @@ export class BlogDatastore {
     return Blog.findByIdAndRemove(blogId, blog);
   }
 
-  getUserById(blogId: string) {
+  getOneById(blogId: string) {
     return Blog.findById(blogId);
   }
 

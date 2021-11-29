@@ -15,8 +15,8 @@ export class UserRouter {
   }
 
   private initRoutes(app: core.Express) {
-    app.get('/api/user/:id', this.getUserById.bind(this));
     app.get('/api/user/get-all', this.getAllUsers.bind(this));
+    app.get('/api/user/:id', this.getUserById.bind(this));
 
     app.post('/api/user', this.create.bind(this));
     app.post('/api/user/auth/login', this.login.bind(this));
@@ -48,6 +48,7 @@ export class UserRouter {
       .findAll()
       .then((result) => {
         respondWithSuccess(response, result);
+        console.log(result);
       })
       .catch(() => {
         respondWithError(response, 'An error occured while retrieving users');

@@ -4,7 +4,14 @@ import { cx } from '../../helpers/class-names';
 
 import './style.scss';
 
-export const Button = ({ classes, text, onClick, primary, secondary, disabled }) => {
+export const Button = ({
+  classes,
+  text,
+  onClick,
+  primary,
+  secondary,
+  disabled,
+}) => {
   return (
     <div
       className={cx({
@@ -12,7 +19,7 @@ export const Button = ({ classes, text, onClick, primary, secondary, disabled })
         'primary-button': primary,
         'secondary-button': secondary,
         'disabled-button': disabled,
-        [classes]: true
+        [classes]: true,
       })}
       onClick={onClick}
     >

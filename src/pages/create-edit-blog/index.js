@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 import { TITLE_MAIN_MENU_ICON } from '../../constants/icon';
 import { ADMIN_MENU } from '../../constants/menu-options';
-import { blogPostService } from '../../services/blog-post-service';
+import { blogService } from '../../services/blog-service';
 
 import { validateText } from '../../helpers/validators';
 import Button from '../../components/button';
@@ -16,44 +16,90 @@ import './style.scss';
 
 export const CreateEditBlog = () => {
   const history = useHistory();
+  const match = useRouteMatch();
 
-  const [titleInputValue, setTitleInputValue] = useState('');
-  const [postContentValue, setPostContentValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [id, setId] = useState('');
 
   const [showErrorInput, setShowErrorInput] = useState(false);
-
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    setHasError(anyOfFieldsHasError);
-  }, [postContentValue, titleInputValue]);
+    // On construct component, set the id from the url
+    if (match.params.id) {
+      setId(match.params.id);
+      fetchBlog(match.params.id);
+    }
+  }, []);
 
-  const anyOfFieldsHasError = () => {
-    return !validateText(postContentValue) || !validateText(titleInputValue);
+  useEffect(() => {
+    setHasError(anyOfFieldsHasError);
+  }, [title, description]);
+
+  const fetchBlog = (blogId) => {
+    blogService
+      .getBlogById(blogId)
+      .then((result) => {
+        if (result?.success && blogId === result.data._id) {
+          setTitle(result.data.title);
+          setDescription(result.data.description);
+        } else {
+          goToAdminPage();
+        }
+      })
+      .catch(() => {});
   };
 
-  const onCancel = () => {
+  const anyOfFieldsHasError = () => {
+    return !validateText(title) || !validateText(description);
+  };
+
+  const goToAdminPage = () => {
     history.push('/admin');
   };
 
   const onChangeTitleHandler = (event) => {
-    setTitleInputValue(event.target.value);
+    setTitle(event.target.value);
     setShowErrorInput(false);
   };
 
-  const onChangeCreateEditBlogHandler = (event) => {
-    setPostContentValue(event.target.value);
+  const onChangeDescriptionHandler = (event) => {
+    setDescription(event.target.value);
     setShowErrorInput(false);
+  };
+
+  const getFormValues = () => {
+    return {
+      title: title,
+      description: description,
+    };
   };
 
   const onSave = () => {
-    blogPostService
-      .createBlog(postContentValue, titleInputValue)
+    blogService
+      .create(getFormValues())
       .then((result) => {
         if (result?.success) {
-          history.push('/admin');
+          goToAdminPage();
         } else {
           setShowErrorInput(true);
+        }
+      })
+      .catch(() => {
+        setShowErrorInput(true);
+      });
+  };
+
+  const onEdit = () => {
+    blogService
+      .edit(id, getFormValues())
+      .then((result) => {
+        if (result?.success && result.data._id === id) {
+          goToAdminPage();
+        } else {
+          setShowErrorInput(true);
+          goToAdminPage();
         }
       })
       .catch(() => {
@@ -70,7 +116,7 @@ export const CreateEditBlog = () => {
           <div className="title-input-container">
             <Field
               label="Insert title blog here"
-              value={titleInputValue}
+              value={title}
               onChange={onChangeTitleHandler}
               type="text"
               errorMessage="Title is not valid"
@@ -84,8 +130,8 @@ export const CreateEditBlog = () => {
           <div className="content-input">
             <Field
               label="Insert blog post here"
-              value={postContentValue}
-              onChange={onChangeCreateEditBlogHandler}
+              value={description}
+              onChange={onChangeDescriptionHandler}
               type="text"
               errorMessage="Blog post is not valid"
               validationFunction={validateText}
@@ -98,13 +144,13 @@ export const CreateEditBlog = () => {
             </div>
             <div className="button-container">
               <Button
-                text="Save"
+                text={id ? 'Update' : 'Save'}
                 primary
                 classes="margin-left"
                 disabled={hasError}
-                onClick={onSave}
+                onClick={id ? onEdit : onSave}
               />
-              <Button text="Cancel" primary onClick={onCancel} />
+              <Button text="Cancel" primary onClick={goToAdminPage} />
             </div>
           </div>
         </div>

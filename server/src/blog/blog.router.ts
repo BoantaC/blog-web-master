@@ -14,8 +14,8 @@ export class BlogRouter {
   }
 
   private initRoutes(app: core.Express) {
+    app.get('/api/blog/get-all', this.getAllBlogs.bind(this));
     app.get('/api/blog/:id', this.getBlogById.bind(this));
-    app.get('/api/blog/get-all', this.getAllUsers.bind(this));
 
     app.post('/api/blog', this.create.bind(this));
 
@@ -28,28 +28,30 @@ export class BlogRouter {
     const blogId: string = request.params.id;
 
     this.blogDataStore
-      .getUserById(blogId)
+      .getOneById(blogId)
       .then((result) => {
         if (!result) {
           return respondWithError(response, 'Blog not found', 404);
         } else {
-          response.send(result);
+          return respondWithSuccess(response, result);
         }
-        respondWithSuccess(response, result);
       })
       .catch((error) => {
         respondWithError(response, error);
       });
   }
 
-  private getAllUsers(request: Request, response: Response) {
+  private getAllBlogs(request: Request, response: Response) {
     this.blogDataStore
       .findAll()
-      .then((result) => {
-        respondWithSuccess(response, result);
+      .then((blogs) => {
+        return respondWithSuccess(response, blogs || []);
       })
-      .catch((error) => {
-        respondWithError(response, error);
+      .catch(() => {
+        return respondWithError(
+          response,
+          'An error occured while retrieving users'
+        );
       });
   }
 

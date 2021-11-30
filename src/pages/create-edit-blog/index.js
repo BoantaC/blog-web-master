@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
-import { TITLE_MAIN_MENU_ICON } from '../../constants/icon';
-import { ADMIN_MENU } from '../../constants/menu-options';
 import { blogService } from '../../services/blog-service';
+import { BLOG_POSTS_TABLE_HEADERS } from '../admin/table-config';
 
-import { validateText } from '../../helpers/validators';
+import AdminHeader from '../../components/admin-header-app';
+import MenuComponent from '../../components/generic-menu';
 import Button from '../../components/button';
 import Field from '../../components/field';
-import AdminHeader from '../../components/admin-header-app';
 
-import MenuComponent from '../../components/generic-menu';
+import { validateText } from '../../helpers/validators';
 
 import './style.scss';
 
@@ -24,6 +23,8 @@ export const CreateEditBlog = () => {
 
   const [showErrorInput, setShowErrorInput] = useState(false);
   const [hasError, setHasError] = useState(false);
+
+  // Do like Cris when u have more than 2 useState
 
   useEffect(() => {
     // On construct component, set the id from the url
@@ -39,7 +40,7 @@ export const CreateEditBlog = () => {
 
   const fetchBlog = (blogId) => {
     blogService
-      .getBlogById(blogId)
+      .getById(blogId)
       .then((result) => {
         if (result?.success && blogId === result.data._id) {
           setTitle(result.data.title);
@@ -108,50 +109,61 @@ export const CreateEditBlog = () => {
   };
 
   return (
-    <div className="blog-post-page">
-      <AdminHeader text="Create Blog" icon={TITLE_MAIN_MENU_ICON} />
-      <div className="blog-post">
-        <MenuComponent menuClass="admin-menu" options={ADMIN_MENU} />
-        <div className="x">
-          <div className="title-input-container">
-            <Field
-              label="Insert title blog here"
-              value={title}
-              onChange={onChangeTitleHandler}
-              type="text"
-              errorMessage="Title is not valid"
-              validationFunction={validateText}
-              isTextArea
-              textAreaRows={5}
-              textAreaCols={30}
-            />
+    <div className="blog-create-edit-page">
+      <AdminHeader text="ADMIN BLOG CREATE / EDIT" />
+      <div className="blog-create-edit-page__container">
+        <div className="admin-menu">
+          <MenuComponent
+            menuClass="admin-menu__container"
+            menuOptionClass="admin-menu__option"
+            iconClass="admin-menu__icon"
+            options={BLOG_POSTS_TABLE_HEADERS}
+            textClass="admin-menu__text"
+          />
+        </div>
+        <div className="admin-content-container">
+          <p className="admin-content-container__title">Create / Edit Blog</p>
+          <Field
+            fieldClass="admin-content-container__field"
+            label="Insert title blog here"
+            value={title}
+            onChange={onChangeTitleHandler}
+            type="text"
+            errorMessage="Title is not valid"
+            validationFunction={validateText}
+            isTextArea
+            textAreaRows={5}
+            textAreaCols={25}
+          />
+          <Field
+            fieldClass="admin-content-container__field"
+            label="Insert blog post here"
+            value={description}
+            onChange={onChangeDescriptionHandler}
+            type="text"
+            errorMessage="Blog post is not valid"
+            validationFunction={validateText}
+            isTextArea
+            textAreaRows={15}
+            textAreaCols={60}
+          />
+          <div className="form-container__error">
+            {showErrorInput && 'Invalid input'}
           </div>
-
-          <div className="content-input">
-            <Field
-              label="Insert blog post here"
-              value={description}
-              onChange={onChangeDescriptionHandler}
-              type="text"
-              errorMessage="Blog post is not valid"
-              validationFunction={validateText}
-              isTextArea
-              textAreaRows={15}
-              textAreaCols={60}
+          <div className="admin-content-container__button-container">
+            <Button
+              text={id ? 'Update' : 'Save'}
+              primary
+              classes="admin-content-container__button-container__button"
+              disabled={hasError}
+              onClick={id ? onEdit : onSave}
             />
-            <div className="form-container__login-error">
-              {showErrorInput && 'Invalid input'}
-            </div>
-            <div className="button-container">
-              <Button
-                text={id ? 'Update' : 'Save'}
-                primary
-                classes="margin-left"
-                disabled={hasError}
-                onClick={id ? onEdit : onSave}
-              />
-              <Button text="Cancel" primary onClick={goToAdminPage} />
-            </div>
+            <Button
+              classes="admin-content-container__button-container__button"
+              text="Cancel"
+              primary
+              onClick={goToAdminPage}
+            />
           </div>
         </div>
       </div>

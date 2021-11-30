@@ -1,17 +1,16 @@
 @import '../../constants/constants';
 
-.blog-page {
-  @extend %page-container;
+.blog {
   display: flex;
-  background: grey;
-}
+  flex-direction: column;
 
-.blog-page-container {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  background: white;
+  &__page {
+    @extend %page-container;
+
+    &__container {
+      @extend %content-container;
+    }
+  }
 
   &__main-menu-container {
     width: 300px;

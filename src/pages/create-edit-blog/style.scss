@@ -1,36 +1,67 @@
 @import '../../constants/constants';
 
-.blog-post-page {
+.blog-create-edit-page {
   @extend %page-container;
   display: flex;
   flex-direction: column;
-}
 
-.blog-post {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 250px 1fr;
-
-  &__create-title-container {
+  &__container {
+    @extend %content-container;
   }
 }
 
-.title-input-container {
-  display: flex;
-  flex-direction: column;
-  margin: 100px auto 0 auto;
+.admin-menu {
+  @extend %main-menu;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__option {
+    margin-top: 40px;
+    margin-left: 30px;
+  }
+
+  &__text {
+    font-size: 25px;
+    margin-left: 25px;
+  }
+
+  &__icon {
+    font-size: 25px;
+  }
 }
 
-.content-input {
+.admin-content-container {
   display: flex;
   flex-direction: column;
-  margin: 80px auto auto auto;
-}
+  width: 70%;
 
-.x {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  &__title {
+    display: flex;
+    margin: 40px auto 40px 40px;
+    font-size: 25px;
+    color: $ICON_LOG_IN_COLOR;
+  }
+
+  &__field {
+    display: flex;
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__button-container {
+    display: flex;
+    margin-left: 40px;
+
+    &__button {
+      margin: 0 20px 0 0;
+    }
+    &__button:last-child {
+      margin-right: 0;
+    }
+  }
 }

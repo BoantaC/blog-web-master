@@ -1,113 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
-import {
-  DELETE_ICON,
-  EDIT_ICON,
-  TITLE_MAIN_MENU_ICON,
-} from '../../constants/icon';
-import { BLOG_POSTS_TABLE_HEADERS } from './table-config';
-import { ADMIN_MENU } from '../../constants/menu-options';
-import { blogService } from '../../services/blog-service';
-
-import MenuComponent from '../../components/generic-menu';
-import Button from '../../components/button';
 import AdminHeader from '../../components/admin-header-app';
+import MenuComponent from '../../components/generic-menu';
+import BlogsList from '../../components/blogs-list';
+import Profile from '../../components/profile';
 
-import TableComponent from '../../components/table';
+import { BLOG_ICON, PROFILE_ICON } from '../../constants/icon';
 
 import './style.scss';
 
 export const AdminPage = () => {
   const history = useHistory();
-  const [blogs, setBlogs] = useState([]);
+  const { path } = useRouteMatch();
 
-  useEffect(() => {
-    getAll();
-  }, []);
-
-  const onEditBlog = (blog) => {
-    history.push(`/admin/blog/edit/${blog._id}`);
-    console.log(blog);
-    // blogService
-    //   // .getBlogById(blog._id)
-    //   .edit(blog._id)
-    //   .then((result) => {
-    //     if (result?.success) {
-    //       // console.log(blog)
-    //     } else {
-    //       console.log('Error at deleting the blog');
-    //     }
-    //   })
-    //   .catch(() => {});
+  const goToBlogPage = () => {
+    history.push('/blog');
   };
 
-  const onDeleteBlog = (blog) => {
-    blogService
-      .deleteBlog(blog._id)
-      .then((result) => {
-        if (result?.success) {
-          getAll();
-        } else {
-          console.log('Error at deleting the blog');
-        }
-      })
-      .catch(() => {});
+  const goToProfile = () => {
+    history.push('/admin/profile');
   };
 
-  const onAddPost = () => {
-    history.push('/admin/blog/create');
-  };
-
-  const BLOG_TABLE_ACTIONS = [
+  const MENU_ACTIONS = [
     {
-      title: 'Edit Blog',
-      onClick: onEditBlog,
-      icon: EDIT_ICON,
+      icon: BLOG_ICON,
+      onClick: goToBlogPage,
+      label: 'Blog',
     },
     {
-      title: 'Delete Blog',
-      onClick: onDeleteBlog,
-      icon: DELETE_ICON,
+      icon: PROFILE_ICON,
+      onClick: goToProfile,
+      label: 'Profile',
     },
   ];
 
-  const getAll = () => {
-    blogService
-      .getAll()
-      .then((result) => {
-        if (result?.success) {
-          setBlogs(result.data);
-        } else {
-          console.log('No blog posts found');
-        }
-      })
-      .catch((error) => {
-        // console.log('Error at getting the blog posts', error);
-      });
-  };
-
   return (
-    <div className="admin-container">
-      <AdminHeader text="Admin page" icon={TITLE_MAIN_MENU_ICON} />
-      <div className="managing-container">
-        <MenuComponent menuClass="admin-menu" options={ADMIN_MENU} />
-        <div className="admin-manage-posts">
-          <div className="button-container">
-            <Button
-              href={'http://localhost:3000/admin/create'}
-              secondary
-              text="Add post"
-              onClick={onAddPost}
-            />
-          </div>
-          <div className="manage-posts-container">
-            <TableComponent
-              actions={BLOG_TABLE_ACTIONS}
-              tableHeaders={BLOG_POSTS_TABLE_HEADERS}
-              entities={blogs}
-            />
-          </div>
+    <div className="admin-manager__page">
+      <AdminHeader text="ADMIN MANAGER" />
+      <div className="admin-manager__container">
+        <div className="admin-manager__menu">
+          <MenuComponent
+            menuClass="admin-menu__container"
+            menuOptionClass="admin-menu__option"
+            iconClass="admin-menu__icon"
+            options={MENU_ACTIONS}
+            textClass="admin-menu__text"
+          />
+        </div>
+        <div className="admin-manager__manage-posts">
+          <Switch>
+            <Route path={`${path}/profile`} component={Profile} />
+            <Route path={`${path}`} component={BlogsList} />
+          </Switch>
         </div>
       </div>
     </div>

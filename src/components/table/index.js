@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style.scss';
 import LogoOption from '../logo-option/inde';
+
+import './style.scss';
 
 export const TableComponent = ({ tableHeaders, entities, actions }) => {
   const _renderHeaderColumns = () => {

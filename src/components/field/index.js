@@ -54,21 +54,21 @@ export const Field = ({
   };
 
   return (
-    <div className="field">
+    <div className={`field ${fieldClass}`}>
       <p className="field__label">{label}</p>
       <div className="field__container">
         {isTextArea ? (
           <textarea
             cols={textAreaCols}
             rows={textAreaRows}
-            className={`field__input ${fieldClass}`}
+            className="field__input"
             placeholder={label}
             onChange={onChange}
             value={value}
           />
         ) : (
           <input
-            className={`field__input ${fieldClass}`}
+            className={`field__input`}
             type={
               type !== 'password'
                 ? 'text'

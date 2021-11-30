@@ -22,7 +22,7 @@ export const blogService = {
     });
   },
 
-  getBlogById: (blogId) => {
+  getById: (blogId) => {
     return new Promise((resolve, reject) => {
       axios
         .get(`${GET_BLOG}/${blogId}`)
@@ -64,10 +64,10 @@ export const blogService = {
     });
   },
 
-  deleteBlog: (blogId) => {
+  delete: (blogId) => {
     return new Promise((resolve, reject) => {
       axios
-        .delete(`${DELETE_BLOG}/${blogId}`)
+        .delete(DELETE_BLOG(blogId))
         .then((response) => {
           resolve(response.data);
         })

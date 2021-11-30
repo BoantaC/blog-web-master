@@ -9,3 +9,5 @@ export const TEAM_ICON = ['fa', 'user-friends'];
 export const CHAT_ICON = ['fa', 'comments'];
 export const EDIT_ICON = ['fa', 'edit'];
 export const DELETE_ICON = ['fa', 'trash-alt'];
+export const BLOG_ICON = ['fa', 'book-open'];
+export const PROFILE_ICON = ['fa', 'id-badge'];

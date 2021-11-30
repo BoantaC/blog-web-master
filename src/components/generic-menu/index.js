@@ -4,15 +4,27 @@ import LogoOption from '../logo-option/inde';
 
 import './style.scss';
 
-export const MenuComponent = ({ options, menuClass }) => {
+export const MenuComponent = ({
+  options,
+  menuClass,
+  menuOptionClass,
+  textClass,
+  iconClass,
+}) => {
   const _renderOptions = (options) => {
     return (
       <div className={`${menuClass}`}>
         {options.map((option, index) => (
-          <div key={index} className="main-menu__option">
+          <div
+            onClick={() => option.onClick()}
+            key={index}
+            className={`${menuOptionClass} main-menu__option`}
+          >
             <LogoOption
-              textClasses={'main-menu__option__text'}
+              icon={option.icon}
+              textClasses={`${textClass} main-menu__option__text`}
               text={option.label}
+              iconClass={iconClass}
             />
           </div>
         ))}
@@ -26,6 +38,10 @@ export const MenuComponent = ({ options, menuClass }) => {
 MenuComponent.propTypes = {
   options: PropTypes.array.isRequired,
   menuClass: PropTypes.string,
+  icon: PropTypes.array,
+  menuOptionClass: PropTypes.string,
+  textClass: PropTypes.string,
+  iconClass: PropTypes.string,
 };
 
 export default MenuComponent;

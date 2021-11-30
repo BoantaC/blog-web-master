@@ -78,7 +78,7 @@ export const LogInPage = () => {
           errorMessage="This password is not valid"
         />
 
-        <div className="form-container__login-error">
+        <div className="form-container__error">
           {showErrorLogin && 'Invalid Credentials'}
         </div>
         <div className="form-container__actions">

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { TITLE_MAIN_MENU_ICON } from '../../constants/icon';
 import { MENU_OPTIONS } from '../../constants/menu-options';
 
 import MenuComponent from '../../components/generic-menu';
@@ -10,15 +9,21 @@ import './style.scss';
 
 export const BlogPage = () => {
   return (
-    <div className="blog-page">
-      <div className="blog-page-container">
-        <div className="blog-page-container__main-menu-container">
-          <AdminHeader text="Blog" icon={TITLE_MAIN_MENU_ICON} />
-          <MenuComponent options={MENU_OPTIONS} />
+    <div className="blog__page">
+      <AdminHeader text="BLOG" />
+      <div className="blog__page__container">
+        <div className="admin-manager__menu">
+          <MenuComponent
+            menuClass="admin-menu__container"
+            menuOptionClass="admin-menu__option"
+            iconClass="admin-menu__icon"
+            options={MENU_OPTIONS}
+            textClass="admin-menu__text"
+          />
         </div>
+        <div className="blog-page-container__dashboard" />
+        <div className="blog-page-container__profile-activities" />
       </div>
-      <div className="blog-page-container__dashboard" />
-      <div className="blog-page-container__profile-activities" />
     </div>
   );
 };

@@ -1,0 +1,12 @@
+@import '../../constants/constants';
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    margin: 40px auto auto auto;
+  }
+}

@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { IUser } from './user.model';
 import { respondWithError, respondWithSuccess } from '../shared/utils/response';
 import * as bcrypt from 'bcrypt';
+import { log } from 'util';
 
 export class UserRouter {
   private userDatastore: UserDatastore;
@@ -34,9 +35,8 @@ export class UserRouter {
         if (!result) {
           return respondWithError(response, 'User not found', 404);
         } else {
-          response.send(result);
+          respondWithSuccess(response, result);
         }
-        respondWithSuccess(response, result);
       })
       .catch((error) => {
         respondWithError(response, error);
@@ -151,7 +151,10 @@ export class UserRouter {
               }
               if (passwordMatch) {
                 return respondWithSuccess(response, {
-                  message: 'Login with success',
+                  _id: existingUser._id,
+                  firstName: existingUser.firstName,
+                  lastName: existingUser.lastName,
+                  email: existingUser.email,
                 });
               } else {
                 return respondWithError(response, 'Invalid credentials', 400);

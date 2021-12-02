@@ -1,9 +1,9 @@
 import {
-  CREATE_BLOG,
   DELETE_BLOG,
-  GET_ALL_BLOGS,
-  GET_BLOG,
   EDIT_BLOG,
+  GET_ALL_BLOGS,
+  CREATE_BLOG,
+  GET_BLOG,
 } from '../constants/api';
 import axios from 'axios';
 

@@ -10,7 +10,6 @@ export const authService = {
           email: email,
           password: password,
         };
-
         axios
           .post(AUTH_LOGIN, body)
           .then((response) => {

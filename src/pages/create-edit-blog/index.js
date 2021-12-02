@@ -17,8 +17,8 @@ export const CreateEditBlog = () => {
   const history = useHistory();
   const match = useRouteMatch();
 
-  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
   const [id, setId] = useState('');
 
   const [showErrorInput, setShowErrorInput] = useState(false);

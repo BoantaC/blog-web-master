@@ -10,17 +10,18 @@ import {
 import './style.scss';
 
 export const Field = ({
-  onChange,
-  label,
-  type,
-  icon,
-  value,
   validationFunction,
   errorMessage,
-  fieldClass,
-  isTextArea,
   textAreaRows,
   textAreaCols,
+  fieldClass,
+  isTextArea,
+  disabled,
+  onChange,
+  label,
+  value,
+  type,
+  icon,
 }) => {
   const [visibilityPassword, setVisibilityPassword] = useState(false);
 
@@ -43,8 +44,7 @@ export const Field = ({
   const _renderErrorMessage = () => {
     return (
       <span className="field__error-msg">
-        {value.length !== 0 &&
-        validationFunction(value) !== undefined &&
+        {validationFunction(value) !== undefined &&
         !validationFunction(value) &&
         errorMessage
           ? errorMessage || 'Invalid Input'
@@ -68,6 +68,7 @@ export const Field = ({
           />
         ) : (
           <input
+            disabled={disabled}
             className={`field__input`}
             type={
               type !== 'password'
@@ -90,16 +91,16 @@ export const Field = ({
 };
 
 Field.propTypes = {
-  onChange: Proptypes.func,
   label: Proptypes.string.isRequired,
-  type: Proptypes.string.isRequired,
-  icon: Proptypes.array,
   value: Proptypes.string.isRequired,
   validationFunction: Proptypes.func,
+  type: Proptypes.string.isRequired,
   errorMessage: Proptypes.string,
-  isTextArea: Proptypes.bool,
   textAreaRows: Proptypes.number,
   textAreaCols: Proptypes.number,
+  isTextArea: Proptypes.bool,
+  onChange: Proptypes.func,
+  icon: Proptypes.array,
 };
 
 export default Field;

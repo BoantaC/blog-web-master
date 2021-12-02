@@ -1,10 +1,11 @@
-import {
-  CHAT_ICON,
-  INBOX_ICON,
-  SETTINGS_ICON,
-  TEAM_ICON,
-} from './icon';
+import { CHAT_ICON, INBOX_ICON, SETTINGS_ICON, TEAM_ICON } from './icon';
 
+export const USER = [
+  {
+    name: 'Boanta',
+    icon: INBOX_ICON,
+  },
+];
 
 export const MENU_OPTIONS = [
   {
@@ -36,5 +37,3 @@ export const MENU_OPTIONS = [
     icon: SETTINGS_ICON,
   },
 ];
-
-

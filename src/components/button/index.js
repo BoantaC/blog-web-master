@@ -16,9 +16,9 @@ export const Button = ({
     <div
       className={cx({
         'button-container': true,
-        'primary-button': primary,
         'secondary-button': secondary,
         'disabled-button': disabled,
+        'primary-button': primary,
         [classes]: true,
       })}
       onClick={onClick}
@@ -29,10 +29,10 @@ export const Button = ({
 };
 
 Button.propTypes = {
-  primary: Proptypes.bool,
+  text: Proptypes.string.isRequired,
   secondary: Proptypes.bool,
   disabled: Proptypes.bool,
-  text: Proptypes.string.isRequired,
+  primary: Proptypes.bool,
   onClick: Proptypes.func,
 };
 

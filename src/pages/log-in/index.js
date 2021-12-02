@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { MAIL_ICON, PASSWORD_ICON } from '../../constants/icon';
 import { authService } from '../../services/auth-service';
+import { UserContext } from '../../App';
 
 import { validateEmail, validatePassword } from '../../helpers/validators';
 
-import Field from '../../components/field';
 import Button from '../../components/button';
+
+import Field from '../../components/field';
 
 import './style.scss';
 
 export const LogInPage = () => {
+  const { setUser } = useContext(UserContext);
   const history = useHistory();
 
-  const [emailInputValue, setEmailInputValue] = useState('');
-  const [passwordInputValue, setPasswordInputValue] = useState('');
+  const [passwordInputValue, setPasswordInputValue] =
+    useState('Parola123@....');
+  const [emailInputValue, setEmailInputValue] = useState(
+    'ing.boanta.ciprian@gmail.com'
+  );
 
   const [showErrorLogin, setShowErrorLogin] = useState(false);
 
@@ -46,6 +52,9 @@ export const LogInPage = () => {
       .login(emailInputValue, passwordInputValue)
       .then((result) => {
         if (result?.success) {
+          setUser(result.data);
+          // We need that when the user refreshes the page and is logged in, to keep it, so we store this in localstorage based on his id
+          localStorage.setItem('userId', result.data._id);
           history.push('/admin');
         } else {
           setShowErrorLogin(true);

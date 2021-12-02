@@ -99,6 +99,7 @@ const Profile = () => {
           text="Cancel"
           primary
           classes="admin-content-container__button-container__button"
+
           onClick={goToAdminPage}
         />
       </div>

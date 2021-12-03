@@ -1,105 +1,120 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  validateEmail,
-  validatePassword,
-  validateText,
-} from '../../helpers/validators';
+import { validateText } from '../../helpers/validators';
 import { useHistory } from 'react-router-dom';
+
+import { MAIL_ICON, USER_ICON } from '../../constants/icon';
+import { userService } from '../../services/user-service';
+import { UserContext } from '../../App';
 
 import Button from '../button';
 import Field from '../field';
 
-import { MAIL_ICON, USER_ICON } from '../../constants/icon';
-import { UserContext } from '../../App';
-
 import './style.scss';
 
 const Profile = () => {
+  const { user, setUser } = useContext(UserContext);
   const history = useHistory();
-  const { user } = useContext(UserContext);
 
-  const [aboutInput, setAboutInput] = useState('');
-  const [nameValue, setNameValue] = useState('');
-
+  const [userForm, setUserForm] = useState(DEFAULT_FIELDS_INPUT);
   const [showError, setShowError] = useState(false);
-
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    setUserForm({
+      firstName: user.firstName || DEFAULT_FIELDS_INPUT.firstName,
+      lastName: user.lastName || DEFAULT_FIELDS_INPUT.lastName,
+      about: user.about || DEFAULT_FIELDS_INPUT.about,
+      email: user.email || DEFAULT_FIELDS_INPUT.email,
+    });
+  }, [user]);
+
+  const onFormChange = (value, property) => {
+    console.log(value);
+    setUserForm({ ...userForm, [property]: value });
+    // setHasError({ ...hasError, [property]: false });
+  };
+
+  useEffect(() => {
     setHasError(anyOfFieldsHasError);
-  }, [aboutInput, nameValue]);
+  }, [userForm]);
 
   const goToAdminPage = () => {
     history.push('/admin');
   };
 
   const anyOfFieldsHasError = () => {
-    return !validateEmail(aboutInput) || !validatePassword(nameValue);
+    return !validateText(userForm);
   };
 
-  const onChangeNameHandler = (event) => {
-    setNameValue(event.target.value);
-    setShowError(false);
+  const onUpdate = () => {
+    delete userForm.email;
+
+    userService
+      .edit(user._id, userForm)
+      .then((result) => {
+        if (result?.success && result.data._id === user._id) {
+          setUser({ ...user, ...userForm });
+          goToAdminPage();
+        } else {
+          setShowError(true);
+          goToAdminPage();
+        }
+      })
+      .catch(() => {
+        setShowError(true);
+      });
   };
 
-  const onChangeAboutInputHandler = (event) => {
-    setAboutInput(event.target.value);
-    setShowError(false);
-  };
-
-  //u can do map of that fields
   return (
     <div className="profile-page">
       <Field
-        value={user.email}
+        value={userForm.email}
         type="text"
         label="Email address"
-        errorMessage="This Email is invalid"
-        validationFunction={validateText}
         icon={MAIL_ICON}
         disabled
       />
       <Field
         label="FirstName"
-        value={user.firstName}
+        value={userForm.firstName}
         errorMessage="This Name is invalid"
         type="text"
-        validationFunction={validateEmail}
-        onChange={onChangeNameHandler}
+        validationFunction={validateText}
+        onChange={(v) => onFormChange(v, 'firstName')}
         icon={USER_ICON}
       />
       <Field
-        value={user.lastName}
-        validationFunction={validateText}
-        onChange={onChangeNameHandler}
         label="LastName"
-        type="text"
+        value={userForm.lastName}
         errorMessage="This Name is invalid"
+        type="text"
+        validationFunction={validateText}
+        onChange={(p) => onFormChange(p, 'lastName')}
         icon={USER_ICON}
       />
       <Field
-        value={aboutInput}
-        onChange={onChangeAboutInputHandler}
         label="About you"
-        type="text"
-        validationFunction={validateText}
+        value={userForm.about}
         errorMessage="This About section must contain 128 letters minimum"
+        type="text"
+        onChange={(p) => onFormChange(p, 'about')}
+        validationFunction={validateText}
         isTextArea
         textAreaCols={50}
         textAreaRows={5}
       />
       <div className="profile-page__button-container">
         <Button
-          text="Submit"
+          text="Update"
           primary
           classes="admin-content-container__button-container__button"
           disabled={hasError}
+          onClick={onUpdate}
         />
         <Button
           text="Cancel"
           primary
           classes="admin-content-container__button-container__button"
-
           onClick={goToAdminPage}
         />
       </div>
@@ -108,6 +123,13 @@ const Profile = () => {
       </div>
     </div>
   );
+};
+
+const DEFAULT_FIELDS_INPUT = {
+  firstName: '',
+  lastName: '',
+  about: '',
+  email: '',
 };
 
 export default Profile;

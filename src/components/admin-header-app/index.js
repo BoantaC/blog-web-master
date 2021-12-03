@@ -20,7 +20,7 @@ export const AdminHeader = ({ text, icon, textClasses }) => {
       />
       <LogoOption
         logoClass="admin-header__user-logged-in"
-        text={user.firstName}
+        text={user.firstName || ''}
         icon={USER_ICON}
         textClasses={`admin-header__title ${textClasses}`}
       />

@@ -4,9 +4,10 @@ const userSchema = new Schema<IUser>({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
+  about: String,
+  password: String,
   avatar: String,
   age: Number,
-  password: String,
 });
 
 export interface IUser {
@@ -15,8 +16,9 @@ export interface IUser {
   avatar: string;
   firstName: string;
   lastName: string;
-  age: number;
   password: string;
+  about: number;
+  age: number;
 }
 
 export const User = model<IUser>('User', userSchema);

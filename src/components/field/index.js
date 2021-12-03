@@ -63,7 +63,7 @@ export const Field = ({
             rows={textAreaRows}
             className="field__input"
             placeholder={label}
-            onChange={onChange}
+            onChange={(e) => onChange(e.target.value)}
             value={value}
           />
         ) : (
@@ -78,7 +78,7 @@ export const Field = ({
                 : 'text'
             }
             placeholder={label}
-            onChange={onChange}
+            onChange={(e) => onChange(e.target.value)}
             value={value}
           />
         )}
@@ -92,7 +92,7 @@ export const Field = ({
 
 Field.propTypes = {
   label: Proptypes.string.isRequired,
-  value: Proptypes.string.isRequired,
+  value: Proptypes.string,
   validationFunction: Proptypes.func,
   type: Proptypes.string.isRequired,
   errorMessage: Proptypes.string,
@@ -101,6 +101,10 @@ Field.propTypes = {
   isTextArea: Proptypes.bool,
   onChange: Proptypes.func,
   icon: Proptypes.array,
+};
+
+Field.defaultProps = {
+  validationFunction: () => {},
 };
 
 export default Field;

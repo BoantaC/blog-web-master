@@ -4,7 +4,6 @@ import { Request, Response } from 'express';
 import { IUser } from './user.model';
 import { respondWithError, respondWithSuccess } from '../shared/utils/response';
 import * as bcrypt from 'bcrypt';
-import { log } from 'util';
 
 export class UserRouter {
   private userDatastore: UserDatastore;

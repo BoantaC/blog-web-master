@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import AdminHeader from '../../components/admin-header-app';
@@ -6,6 +6,7 @@ import MenuComponent from '../../components/generic-menu';
 import BlogsList from '../../components/blogs-list';
 import Profile from '../../components/profile';
 
+import { UserContext } from '../../App';
 import { BLOG_ICON, PROFILE_ICON } from '../../constants/icon';
 
 import './style.scss';
@@ -13,13 +14,14 @@ import './style.scss';
 export const AdminPage = () => {
   const history = useHistory();
   const { path } = useRouteMatch();
+  const { user } = useContext(UserContext);
 
   const goToBlogPage = () => {
     history.push('/blog');
   };
 
   const goToProfile = () => {
-    history.push('/admin/profile');
+    history.push(`/admin/profile/${user._id}`);
   };
 
   const MENU_ACTIONS = [

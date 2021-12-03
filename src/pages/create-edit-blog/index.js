@@ -24,8 +24,6 @@ export const CreateEditBlog = () => {
   const [showErrorInput, setShowErrorInput] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  // Do like Cris when u have more than 2 useState
-
   useEffect(() => {
     // On construct component, set the id from the url
     if (match.params.id) {

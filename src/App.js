@@ -6,7 +6,6 @@ import {
   useHistory,
   useRouteMatch,
 } from 'react-router-dom';
-
 import {
   faEnvelopeOpenText,
   faUserFriends,
@@ -56,7 +55,6 @@ export const App = () => {
 
   useEffect(() => {
     const userId = getItemFromLocalStorageById('userId');
-
     if (userId) {
       userService
         .getOneById(userId)
@@ -66,6 +64,7 @@ export const App = () => {
           if (userFromResponse?._id) {
             setUser(userFromResponse);
             if (match.path === `/login`) {
+              console.log();
               history.push(`/admin`);
             }
           }
@@ -74,6 +73,8 @@ export const App = () => {
           localStorage.removeItem('userId');
           history.push(`/login`);
         });
+    } else {
+      history.push(`/login`);
     }
   }, []);
 

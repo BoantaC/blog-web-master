@@ -11,4 +11,6 @@ export const DELETE_BLOG = (blogId) =>
 
 export const EDIT_BLOG = (blogId) => `http://localhost:8081/api/blog/${blogId}`;
 
+export const EDIT_USER = (userId) => `http://localhost:8081/api/user/${userId}`;
+
 export const GET_USER_BY_ID = (id) => `http://localhost:8081/api/user/${id}`;

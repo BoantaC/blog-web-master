@@ -1,4 +1,4 @@
-import React, { useEffect, useState,  } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BLOG_POSTS_TABLE_HEADERS } from '../../pages/admin/table-config';
 import { DELETE_ICON, EDIT_ICON } from '../../constants/icon';
@@ -8,8 +8,8 @@ import TableComponent from '../table';
 import Button from '../button';
 
 const BlogsList = () => {
-  const history = useHistory();
   const [blogs, setBlogs] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getAll();

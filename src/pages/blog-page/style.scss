@@ -8,30 +8,21 @@
     @extend %page-container;
 
     &__container {
-      @extend %content-container;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__blog-container {
+      display: flex;
+      flex-direction: column;
+
+      &__title {
+        padding: 20px;
+        border-radius: 20px;
+        background: grey;
+        margin-top: 20px;
+      }
     }
   }
-
-  &__main-menu-container {
-    width: 300px;
-    display: grid;
-    grid-template-rows: 90px 800px;
-    border-right: 1px solid $ICON_LOG_IN_COLOR;
-  }
-
-  &__dashboard {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__profile-activities {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.logo-container {
-  width: 100%;
-  height: 80px;
-  border-bottom: 1px solid $ICON_LOG_IN_COLOR;
 }

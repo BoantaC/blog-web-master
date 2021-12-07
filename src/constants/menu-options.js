@@ -20,20 +20,4 @@ export const MENU_OPTIONS = [
     label: 'Team',
     icon: TEAM_ICON,
   },
-  {
-    label: 'Chat',
-    icon: CHAT_ICON,
-  },
-  {
-    label: 'Team',
-    icon: TEAM_ICON,
-  },
-  {
-    label: 'Inbox',
-    icon: INBOX_ICON,
-  },
-  {
-    label: 'Settings',
-    icon: SETTINGS_ICON,
-  },
 ];

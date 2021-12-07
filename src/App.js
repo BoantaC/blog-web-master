@@ -23,11 +23,13 @@ import {
   faEye,
 } from '@fortawesome/free-solid-svg-icons';
 import fontawesome from '@fortawesome/fontawesome';
+import { userService } from './services/user-service';
+
 import CreateEditBlog from './pages/create-edit-blog';
+import Blogs from './pages/blogs';
+import BlogPage from './pages/blog-page';
 import LogInPage from './pages/log-in';
 import AdminPage from './pages/admin';
-import BlogPage from './pages/blog-page';
-import { userService } from './services/user-service';
 
 fontawesome.library.add(
   faEnvelopeOpenText,
@@ -87,7 +89,10 @@ export const App = () => {
       <UserContext.Provider value={{ user, setUser }}>
         <Router history={history}>
           <Switch>
-            <Route exact path="/blog">
+            <Route exact path="/client/blogs">
+              <Blogs />
+            </Route>
+            <Route exact path="/client/blog/:id">
               <BlogPage />
             </Route>
             <Route exact path="/admin/blog/create">

@@ -31,7 +31,7 @@ LogoOption.propTypes = {
   textClasses: PropTypes.string.isRequired,
   width: PropTypes.number,
   height: PropTypes.number,
-  iconClass: PropTypes.string,
+  logoClass: PropTypes.string,
 };
 
 export default LogoOption;

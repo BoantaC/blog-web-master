@@ -77,4 +77,32 @@ export const blogService = {
         });
     });
   },
+
+  displayBlogById: (blogId) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${GET_BLOG}/${blogId}`)
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((error) => {
+          console.error('Error at getting the blog', error);
+          reject(error);
+        });
+    });
+  },
+
+  getAllBlogsDisplayed: () => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(GET_ALL_BLOGS)
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((error) => {
+          console.error('Error at getting all the blog posts', error);
+          reject(error);
+        });
+    });
+  },
 };

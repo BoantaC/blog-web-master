@@ -17,11 +17,11 @@ export class BlogRouter {
     app.get('/api/blog/get-all', this.getAllBlogs.bind(this));
     app.get('/api/blog/:id', this.getBlogById.bind(this));
 
-    app.post('/api/blog', this.create.bind(this));
+    app.delete('/api/blog/:id', this.delete.bind(this));
 
     app.put('/api/blog/:id', this.update.bind(this));
 
-    app.delete('/api/blog/:id', this.delete.bind(this));
+    app.post('/api/blog', this.create.bind(this));
   }
 
   private getBlogById(request: Request, response: Response) {

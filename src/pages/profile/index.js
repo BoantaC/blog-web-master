@@ -6,8 +6,8 @@ import { MAIL_ICON, USER_ICON } from '../../constants/icon';
 import { userService } from '../../services/user-service';
 import { UserContext } from '../../App';
 
-import Button from '../button';
-import Field from '../field';
+import Button from '../../components/button';
+import Field from '../../components/field';
 
 import './style.scss';
 
@@ -31,7 +31,7 @@ const Profile = () => {
   const onFormChange = (value, property) => {
     console.log(value);
     setUserForm({ ...userForm, [property]: value });
-    // setHasError({ ...hasError, [property]: false });
+    setHasError({ ...hasError, [property]: false });
   };
 
   useEffect(() => {
@@ -72,10 +72,11 @@ const Profile = () => {
         type="text"
         label="Email address"
         icon={MAIL_ICON}
+        validationFunction={validateText}
         disabled
       />
       <Field
-        label="FirstName"
+        label="First name"
         value={userForm.firstName}
         errorMessage="This Name is invalid"
         type="text"
@@ -84,7 +85,7 @@ const Profile = () => {
         icon={USER_ICON}
       />
       <Field
-        label="LastName"
+        label="Last name"
         value={userForm.lastName}
         errorMessage="This Name is invalid"
         type="text"
@@ -107,14 +108,14 @@ const Profile = () => {
         <Button
           text="Update"
           primary
-          classes="admin-content-container__button-container__button"
+          classes="profile-page__button-container__button"
           disabled={hasError}
           onClick={onUpdate}
         />
         <Button
           text="Cancel"
           primary
-          classes="admin-content-container__button-container__button"
+          classes="profile-page__button-container__button"
           onClick={goToAdminPage}
         />
       </div>

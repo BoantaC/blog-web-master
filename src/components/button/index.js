@@ -30,9 +30,11 @@ export const Button = ({
 
 Button.propTypes = {
   text: Proptypes.string.isRequired,
-  secondary: Proptypes.bool,
+  classes: Proptypes.string,
   disabled: Proptypes.bool,
+  onclick: Proptypes.func,
   primary: Proptypes.bool,
+  secondary: Proptypes.bool,
   onClick: Proptypes.func,
 };
 

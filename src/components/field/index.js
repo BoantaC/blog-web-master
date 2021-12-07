@@ -91,20 +91,18 @@ export const Field = ({
 };
 
 Field.propTypes = {
-  label: Proptypes.string.isRequired,
-  value: Proptypes.string,
   validationFunction: Proptypes.func,
+  label: Proptypes.string.isRequired,
   type: Proptypes.string.isRequired,
   errorMessage: Proptypes.string,
   textAreaRows: Proptypes.number,
   textAreaCols: Proptypes.number,
+  fieldClass: Proptypes.string,
   isTextArea: Proptypes.bool,
+  disabled: Proptypes.bool,
   onChange: Proptypes.func,
+  value: Proptypes.string,
   icon: Proptypes.array,
-};
-
-Field.defaultProps = {
-  validationFunction: () => {},
 };
 
 export default Field;

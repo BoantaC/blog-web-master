@@ -4,7 +4,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import { blogService } from '../../services/blog-service';
 import { BLOG_POSTS_TABLE_HEADERS } from '../admin/table-config';
 
-import AdminHeader from '../../components/admin-header-app';
+import AdminHeader from '../../components/header-app';
 import MenuComponent from '../../components/generic-menu';
 import Button from '../../components/button';
 import Field from '../../components/field';

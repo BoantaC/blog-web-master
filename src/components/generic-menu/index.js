@@ -38,7 +38,6 @@ export const MenuComponent = ({
 MenuComponent.propTypes = {
   options: PropTypes.array.isRequired,
   menuClass: PropTypes.string,
-  icon: PropTypes.array,
   menuOptionClass: PropTypes.string,
   textClass: PropTypes.string,
   iconClass: PropTypes.string,

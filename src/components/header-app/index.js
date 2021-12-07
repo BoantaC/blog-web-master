@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import * as Proptypes from 'prop-types';
 import { UserContext } from '../../App';
 
-import LogoOption from '../logo-option/inde';
-
 import { USER_ICON } from '../../constants/icon';
+
+import LogoOption from '../logo-option/inde';
 
 import './style.scss';
 

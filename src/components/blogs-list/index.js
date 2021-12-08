@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BLOG_POSTS_TABLE_HEADERS } from '../../pages/admin/table-config';
-import { DELETE_ICON, EDIT_ICON } from '../../constants/icon';
 import { blogService } from '../../services/blog-service';
 
 import TableComponent from '../table';
@@ -55,12 +54,12 @@ const BlogsList = () => {
     {
       title: 'Edit Blog',
       onClick: onEditBlog,
-      icon: EDIT_ICON,
+      icon: `fa fa-edit`,
     },
     {
       title: 'Delete Blog',
       onClick: onDeleteBlog,
-      icon: DELETE_ICON,
+      icon: `fa fa-ban`,
     },
   ];
 

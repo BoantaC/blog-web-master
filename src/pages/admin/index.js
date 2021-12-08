@@ -7,7 +7,6 @@ import BlogsList from '../../components/blogs-list';
 import Profile from '../profile';
 
 import { UserContext } from '../../App';
-import { BLOG_ICON, PROFILE_ICON } from '../../constants/icon';
 
 import './style.scss';
 
@@ -26,12 +25,10 @@ export const AdminPage = () => {
 
   const MENU_ACTIONS = [
     {
-      icon: BLOG_ICON,
       onClick: goToBlogPage,
       label: 'Blog',
     },
     {
-      icon: PROFILE_ICON,
       onClick: goToProfile,
       label: 'Profile',
     },

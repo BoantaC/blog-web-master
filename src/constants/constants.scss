@@ -21,11 +21,19 @@
   border-right: 1px solid #8a8585;
 }
 
+.featured-blog-background {
+
+}
+
 .margin-left {
   display: flex;
   margin-left: 10px;
 }
 //Log-in page constants
 
+$DARK_BLUE_MAIN_COLOR: #1b303aff;
+$BUTTON_CLICKED_BUTTON_COLOR: #e77051;
+$BLUE_MAIN_COLOR: #1b303a;
+$MAIN_WHITE_COLOR: #ffffff;
 $MAIN_LOG_IN_COLOR: #e3e3e3;
 $ICON_LOG_IN_COLOR: #8a8585;

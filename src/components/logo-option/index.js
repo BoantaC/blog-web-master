@@ -1,24 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import './style.scss';
 
 export const LogoOption = ({
-  logoClass,
-  icon,
-  text,
   textClasses,
+  text,
+  icon,
+  logoClass,
   iconClass,
 }) => {
   return (
     <div className={`${logoClass} logo-option-container`}>
       {icon && (
-        <FontAwesomeIcon
-          icon={icon}
-          className={`logo-option-image ${iconClass}`}
-        />
+        <i className={`logo-option-container__image ${iconClass} ${icon}`} />
       )}
       <p className={textClasses}>{text}</p>
     </div>
@@ -26,12 +21,11 @@ export const LogoOption = ({
 };
 
 LogoOption.propTypes = {
+  textClasses: PropTypes.string,
   text: PropTypes.string.isRequired,
   icon: PropTypes.array,
-  textClasses: PropTypes.string.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number,
   logoClass: PropTypes.string,
+  iconClass: PropTypes.string,
 };
 
 export default LogoOption;

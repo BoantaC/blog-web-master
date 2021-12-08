@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { validateText } from '../../helpers/validators';
 import { useHistory } from 'react-router-dom';
 
-import { MAIL_ICON, USER_ICON } from '../../constants/icon';
 import { userService } from '../../services/user-service';
 import { UserContext } from '../../App';
 
@@ -71,7 +70,7 @@ const Profile = () => {
         value={userForm.email}
         type="text"
         label="Email address"
-        icon={MAIL_ICON}
+        icon={`fa fa-envelope`}
         validationFunction={validateText}
         disabled
       />
@@ -82,7 +81,7 @@ const Profile = () => {
         type="text"
         validationFunction={validateText}
         onChange={(v) => onFormChange(v, 'firstName')}
-        icon={USER_ICON}
+        icon={`fa fa-user`}
       />
       <Field
         label="Last name"
@@ -91,7 +90,7 @@ const Profile = () => {
         type="text"
         validationFunction={validateText}
         onChange={(p) => onFormChange(p, 'lastName')}
-        icon={USER_ICON}
+        icon={`fa fa-user`}
       />
       <Field
         label="About you"

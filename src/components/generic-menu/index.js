@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LogoOption from '../logo-option/inde';
+import LogoOption from '../logo-option';
 
 import './style.scss';
 

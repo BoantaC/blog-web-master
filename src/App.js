@@ -6,23 +6,6 @@ import {
   useHistory,
   useRouteMatch,
 } from 'react-router-dom';
-import {
-  faEnvelopeOpenText,
-  faUserFriends,
-  faAppleAlt,
-  faComments,
-  faEyeSlash,
-  faTrashAlt,
-  faBookOpen,
-  faIdBadge,
-  faUserAlt,
-  faInbox,
-  faCogs,
-  faEdit,
-  faKey,
-  faEye,
-} from '@fortawesome/free-solid-svg-icons';
-import fontawesome from '@fortawesome/fontawesome';
 import { userService } from './services/user-service';
 
 import CreateEditBlog from './pages/create-edit-blog';
@@ -30,23 +13,6 @@ import Blogs from './pages/blogs';
 import BlogPage from './pages/blog-page';
 import LogInPage from './pages/log-in';
 import AdminPage from './pages/admin';
-
-fontawesome.library.add(
-  faEnvelopeOpenText,
-  faUserFriends,
-  faAppleAlt,
-  faComments,
-  faEyeSlash,
-  faTrashAlt,
-  faBookOpen,
-  faUserAlt,
-  faIdBadge,
-  faInbox,
-  faCogs,
-  faEdit,
-  faKey,
-  faEye
-);
 
 export const UserContext = createContext({});
 

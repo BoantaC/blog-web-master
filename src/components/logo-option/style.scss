@@ -4,13 +4,10 @@
   display: flex;
 
   &__image {
-    font-size: 40px;
+    font-size: 20px;
+    margin: 0 10px auto 10px;
+    color: $ICON_LOG_IN_COLOR;
   }
-}
-
-.logo-option-image {
-  color: $ICON_LOG_IN_COLOR;
-  font-size: 20px;
 }
 
 .main-menu__title {

@@ -1,25 +1,112 @@
 @import '../../constants/constants';
 
-.admin-header {
+.header {
   display: flex;
-  width: 100%;
-  border-bottom: 1px solid $ICON_LOG_IN_COLOR;
+  width: 1024px;
+  margin: 0 auto;
+
+  &__wrapper {
+    @extend %header-app-display;
+    width: 100%;
+    display: flex;
+
+    &__menu-container {
+      display: flex;
+      margin: auto 0 auto auto;
+      padding: 30px;
+    }
+  }
 
   &__title {
     display: flex;
-    color: #8a8585;
-    font-weight: bold;
-    font-size: 20px;
-    margin-left: 10px;
-  }
-
-  &__logo {
+    color: #ffff;
+    font-size: 30px;
+    letter-spacing: 3px;
     padding: 30px;
+    margin: 0 auto 0 0;
   }
 
   &__user-logged-in {
-    font-size: 20px;
-    padding: 30px;
-    margin:0 0 0 auto;
+    margin: auto 0 auto auto;
   }
+}
+
+.logo-option-image {
+  color: $MAIN_WHITE_COLOR;
+  font-size: 30px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.logo-option-image:last-child {
+  margin-right: 0;
+}
+
+.divider {
+  margin: 0 10px 0 0;
+  border-right: 1px solid $MAIN_WHITE_COLOR;
+}
+
+.social-media-menu-container {
+  display: flex;
+}
+
+//Mobile Version
+.header-mobile {
+  display: flex;
+  width: 100%;
+  padding: 30px;
+
+  &__wrapper {
+    @extend %header-app-display;
+    display: flex;
+    width: 100%;
+    height: 100px;
+  }
+
+  &__menu-icon {
+    margin: auto 15px auto auto;
+  }
+
+  &__title {
+    letter-spacing: 3px;
+    font-size: 30px;
+    color: #ffff;
+    margin: 0 auto 0 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header__wrapper {
+    display: none;
+  }
+
+  .header-mobile {
+    display: flex;
+  }
+}
+
+@media (min-width: 700px) {
+  .header__wrapper {
+    display: flex;
+  }
+
+  .header-mobile__wrapper {
+    display: none;
+  }
+}
+
+//constants
+%header-app-display {
+  border-bottom: 1px solid $ICON_LOG_IN_COLOR;
+  -webkit-box-shadow: 0 14px 12px -8px #737373;
+  box-shadow: 0 14px 12px -8px #737373;
+  background: #264653;
+  z-index: max(200);
+}
+
+%header-title-style {
+  color: #ffff;
+  font-size: 30px;
+  letter-spacing: 3px;
 }

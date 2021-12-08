@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { MAIL_ICON, PASSWORD_ICON } from '../../constants/icon';
 import { authService } from '../../services/auth-service';
 import { UserContext } from '../../App';
 
@@ -73,7 +72,7 @@ export const LogInPage = () => {
           onChange={onChangeEmailInputHandler}
           label="Email address"
           type="text"
-          icon={MAIL_ICON}
+          icon={`fa fa-envelope`}
           validationFunction={validateEmail}
           errorMessage="This Email is invalid"
         />
@@ -82,7 +81,7 @@ export const LogInPage = () => {
           onChange={onChangePasswordInputHandler}
           label="Password"
           type="password"
-          icon={PASSWORD_ICON}
+          icon={`fa fa-key`}
           validationFunction={validatePassword}
           errorMessage="This password is not valid"
         />

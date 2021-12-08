@@ -6,10 +6,13 @@
 
   &__page {
     @extend %page-container;
+    overflow: hidden;
   }
 
   &__container {
     @extend %content-container;
+    overflow: scroll;
+      overflow-x: hidden;
   }
 
   &__manage-posts {

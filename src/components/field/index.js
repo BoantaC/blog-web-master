@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import * as Proptypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {
-  INVISIBLE_PASSWORD_ICON,
-  VISIBLE_PASSWORD_ICON,
-} from '../../constants/icon';
+import LogoOption from '../logo-option';
 
 import './style.scss';
 
@@ -27,14 +23,13 @@ export const Field = ({
 
   const _renderPasswordEye = () => {
     return type === 'password' ? (
-      <FontAwesomeIcon
+      <i
         onClick={() => {
           setVisibilityPassword(!visibilityPassword);
         }}
-        icon={
-          visibilityPassword ? INVISIBLE_PASSWORD_ICON : VISIBLE_PASSWORD_ICON
-        }
-        className="field__password-icon"
+        className={`field__password-icon ${
+          visibilityPassword ? ` fa fa-eye-slash` : `fa fa-eye`
+        }`}
       />
     ) : (
       ''
@@ -55,7 +50,12 @@ export const Field = ({
 
   return (
     <div className={`field ${fieldClass}`}>
-      <p className="field__label">{label}</p>
+      <LogoOption
+        textClasses="field__label"
+        icon={icon}
+        className="field__label"
+        text={label}
+      />
       <div className="field__container">
         {isTextArea ? (
           <textarea
@@ -83,7 +83,7 @@ export const Field = ({
           />
         )}
         {_renderPasswordEye()}
-        {icon && <FontAwesomeIcon className="field__icon" icon={icon} />}
+        {icon && <i className={`field__icon ${icon}`} />}
       </div>
       {_renderErrorMessage()}
     </div>
